@@ -6,6 +6,7 @@ import {
   SwaggerModule,
 } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import { envs } from 'config';
 
 async function bootstrap() {
   const logger = new Logger('bootstrap');
@@ -55,7 +56,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config, options);
   SwaggerModule.setup('docs', app, document);
 
-  await app.listen(process.env.PORT ?? 3000);
+  await app.listen(envs.port ?? 3000);
   logger.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();
