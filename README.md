@@ -36,7 +36,7 @@ API REST desarrollada con NestJS para el control de asistencia y acceso. La API 
 
 ```bash
 # Clonar el repositorio
-git clone [URL_DEL_REPOSITORIO]
+git clone https://github.com/Hasuro1797/api-attendance.git
 
 cd api-attendance
 ```
