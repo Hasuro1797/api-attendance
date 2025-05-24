@@ -70,6 +70,15 @@ model Config {
   updateBy     String
 }
 
+model AttendanceLog {
+  id         Int      @id @default(autoincrement())
+  executedAt DateTime @default(now())
+  created    Int
+  updated    Int
+  status     String
+  error      String?
+}
+
 enum Role {
   USER
   ADMIN
