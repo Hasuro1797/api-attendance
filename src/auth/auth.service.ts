@@ -138,4 +138,9 @@ export class AuthService {
     });
     return token;
   }
+
+  async getProfile(userId: string) {
+    const user = await this.userService.findOne(userId);
+    return user;
+  }
 }

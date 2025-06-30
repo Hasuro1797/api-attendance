@@ -1,0 +1,30 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Redireccionando...</title>
+    <script>
+      const token = localStorage.getItem('token');
+
+      const redirect = (url) => window.location.replace(url);
+
+      if (!token) {
+        redirect('login.html');
+      } else {
+        fetch('/api/auth/verify-token', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+          .then((res) =>
+            res.ok
+              ? redirect('main.html')
+              : redirect('login.html')
+          )
+          .catch(() => redirect('login.html'));
+      }
+    </script>
+  </head>
+  <body style="display: none;"></body>
+</html>

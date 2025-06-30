@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Get,
   HttpCode,
   HttpStatus,
   Post,
@@ -73,5 +74,37 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   signup(@Body() signupDto: CreateUserDto) {
     return this.authService.signup(signupDto);
+  }
+
+  @Get('verify-token')
+  @HttpCode(HttpStatus.OK)
+  verifyToken(@ActiveUser('sub') userId: string) {
+    return {
+      message: 'Token válido',
+      userId,
+    };
+  }
+
+  @Get('profile')
+  @Auth([Roles.ADMIN, Roles.USER])
+  @ApiBearerAuth('accessToken')
+  @ApiOperation({ summary: 'Obtener perfil' })
+  @ApiResponse({ status: 200, description: 'Perfil obtenido exitosamente' })
+  @ApiResponse({
+    status: 401,
+    description: 'Acceso no autorizado: Token expirado o inválido',
+  })
+  @ApiResponse({
+    status: 403,
+    description:
+      'Acceso no autorizado: No tienes permisos para estos endpoints',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Usuario no encontrado',
+  })
+  @HttpCode(HttpStatus.OK)
+  getProfile(@ActiveUser('sub') userId: string) {
+    return this.authService.getProfile(userId);
   }
 }

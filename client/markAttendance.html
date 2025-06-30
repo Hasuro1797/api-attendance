@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WES PERÚ - Marcar Asistencia</title>
+  <link rel="stylesheet" href="assets/styles/asistenciastyle.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <img src="assets/images/logo-wes.png" alt="WES PERÚ Logo" />
+      </div>
+      <div class="user-menu">
+        <div id="userName"></div>
+        <div id="userAvatar"></div>
+      </div>
+    </div>
+  </header>
+
+  <aside class="sidebar">
+    <ul class="sidebar-menu">
+      <li class="sidebar-menu-item">
+        <a href="main.html">
+          <i class="fas fa-tachometer-alt"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+      <li class="sidebar-menu-item active">
+        <a href="markAttendance.html">
+          <i class="fas fa-clock"></i>
+          <span>Marcar Asistencia</span>
+        </a>
+      </li>
+      <li class="sidebar-menu-item">
+        <a href="historial.html">
+          <i class="fas fa-calendar-alt"></i>
+          <span>Mi Historial</span>
+        </a>
+      </li>
+      <li class="sidebar-menu-item">
+        <a href="reportes.html">
+          <i class="fas fa-chart-bar"></i>
+          <span>Reportes</span>
+        </a>
+      </li>
+      <li class="sidebar-menu-item">
+        <a href="Configuracion.html">
+          <i class="fas fa-cog"></i>
+          <span>Configuración</span>
+        </a>
+      </li>
+      <li class="sidebar-menu-item">
+        <button id="logoutBtn" class="menu-item-content logout-btn" type="button">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Cerrar Sesión</span>
+        </button>
+      </li>
+    </ul>
+  </aside>
+
+  <main class="main-content">
+    <h1 class="page-title">Marcar Asistencia</h1>
+    <p class="page-subtitle">Registra tu entrada y salida del día</p>
+
+    <div class="attendance-clock-container">
+      <div class="attendance-clock">
+        <h2>Control de Asistencia</h2>
+        <div class="current-time-display" id="currentTime"></div>
+        <div class="current-date">Cargando fecha...</div>
+
+        <div class="attendance-action">
+          <!-- Botones dinámicos se insertarán aquí -->
+        </div>
+
+        <div class="connection-status">
+          <div class="status-indicator indicator-online"></div>
+          <span>Conectado a Red Corporativa (Oficina)</span>
+        </div>
+
+        <div class="status-message" style="display:none;">
+          <i class="fas fa-check-circle"></i> Entrada registrada correctamente a las <span id="horaEntrada"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="status-info">
+      <div class="status-card">
+        <div class="status-card-title">
+          <i class="fas fa-info-circle"></i> Información de Asistencia
+        </div>
+        <div class="status-info-grid">
+          <div class="status-info-item">
+            <div class="status-info-label">Estado Actual</div>
+            <div class="status-info-value" id="estadoActual">Cargando...</div>
+          </div>
+          <div class="status-info-item">
+            <div class="status-info-label">Hora de Entrada</div>
+            <div class="status-info-value" id="horaEntradaInfo">Cargando...</div>
+          </div>
+          <div class="status-info-item">
+            <div class="status-info-label">Hora de Salida</div>
+            <div class="status-info-value" id="horaSalidaInfo">Cargando...</div>
+          </div>
+          <div class="status-info-item">
+            <div class="status-info-label">Tiempo Trabajado</div>
+            <div class="status-info-value" id="tiempoTrabajado">Cargando...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quick-history">
+      <h2 class="history-title">Registro de Asistencia - Esta Semana</h2>
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Entrada</th>
+            <th>Salida</th>
+            <th>Horas</th>
+            <th>Modalidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Aquí se insertará el historial dinámicamente -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script type="module" src="scripts/markAttendance.js"></script>
+</body>
+</html>
