@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WES PERÚ - Historial-Asistencia</title>
+    <link rel="stylesheet" href="assets/styles/historialstyle.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+    <header>
+    <div class="header-container">
+        <div class="logo">
+            <img src="assets/images/logo-wes.png" alt="WES PERÚ Logo" />
+        </div>
+        <div class="user-menu">
+            <div class="user-info">
+                <span id="userName"></span> </div>
+            <div class="user-avatar" id="userAvatar"></div> <button id="logoutBtn" class="menu-item-content logout-btn" type="button">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cerrar Sesión</span>
+            </button>
+        </div>
+        </div>
+    </header>
+     <aside class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="sidebar-menu-item ">
+                <a href="main.html">
+                    <div class="menu-item-content">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </div>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="markAttendance.html">
+                    <div class="menu-item-content">
+                        <i class="fas fa-clock"></i>
+                        <span>Marcar Asistencia</span>
+                    </div>
+                </a>
+            </li>
+            <li class="sidebar-menu-item active">
+                <a href="historial.html">
+                    <div class="menu-item-content">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Mi Historial</span>
+                    </div>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="reportes.html">
+                    <div class="menu-item-content">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Reportes</span>
+                    </div>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="Configuracion.html">
+                    <div class="menu-item-content">
+                        <i class="fas fa-cog"></i>
+                        <span>Configuración</span>
+                    </div>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <button id="logoutBtn" class="menu-item-content logout-btn" type="button">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Cerrar Sesión</span>
+                </button>
+            </li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        <h1 class="page-title">Mi Historial de Asistencias</h1>
+        <p class="page-subtitle">Revisa tus registros de asistencia detallados.</p>
+
+        <div class="filters-section quick-actions"> <div class="form-group">
+                <label for="filterDaysAgo">Días atrás:</label>
+                <input type="number" id="filterDaysAgo" value="30" min="1" max="365">
+            </div>
+            <div class="form-group filter-checkbox">
+                <input type="checkbox" id="filterCurrentWeek">
+                <label for="filterCurrentWeek">Semana actual</label>
+            </div>
+            <div class="form-group filter-checkbox">
+                <input type="checkbox" id="filterCurrentDay">
+                <label for="filterCurrentDay">Día actual</label>
+            </div>
+            <button id="applyFiltersBtn" class="action-btn">
+                <i class="fas fa-filter"></i> Aplicar Filtros
+            </button>
+            </div>
+
+        <div class="table-card">
+            <table class="attendance-table">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th>Hora Entrada</th>
+                        <th>Hora Salida</th>
+                        <th>Horas Trabajadas</th>
+                        <th>Modalidad</th>
+                    </tr>
+                </thead>
+                <tbody id="historialTableBody">
+                    <tr class="skeleton-row loading-row">
+                        <td><span class="skeleton skeleton-text" style="width: 80px;"></span></td>
+                        <td><span class="skeleton skeleton-status" style="width: 70px;"></span></td>
+                        <td><span class="skeleton skeleton-text" style="width: 60px;"></span></td>
+                        <td><span class="skeleton skeleton-text" style="width: 60px;"></span></td>
+                        <td><span class="skeleton skeleton-text" style="width: 50px;"></span></td>
+                        <td><span class="skeleton skeleton-text" style="width: 70px;"></span></td>
+                        <td><span class="skeleton skeleton-text" style="width: 100px;"></span></td>
+                    </tr>
+                    <tr class="skeleton-row loading-row">
+                        <td><span class="skeleton skeleton-text" style="width: 80px;"></span></td>
+                        <td><span class="skeleton skeleton-status" style="width: 70px;"></span></td>
+                        <td><span class="skeleton skeleton-text" style="width: 60px;"></span></td>
+                        <td><span class="skeleton skeleton-text" style="width: 60px;"></span></td>
+                        <td><span class="skeleton skeleton-text" style="width: 50px;"></span></td>
+                        <td><span class="skeleton skeleton-text" style="width: 70px;"></span></td>
+                        <td><span class="skeleton skeleton-text" style="width: 100px;"></span></td>
+                    </tr>
+                    <tr class="skeleton-row loading-row">
+                        <td><span class="skeleton skeleton-text" style="width: 80px;"></span></td>
+                        <td><span class="skeleton skeleton-status" style="width: 70px;"></span></td>
+                        <td><span class="skeleton skeleton-text" style="width: 60px;"></span></td>
+                        <td><span class="skeleton skeleton-text" style="width: 60px;"></span></td>
+                        <td><span class="skeleton skeleton-text" style="width: 50px;"></span></td>
+                        <td><span class="skeleton skeleton-text" style="width: 70px;"></span></td>
+                        <td><span class="skeleton skeleton-text" style="width: 100px;"></span></td>
+                    </tr>
+                    </tbody>
+            </table>
+            <div id="tableStatus" class="table-loader">Cargando historial...</div>
+        </div>
+
+        <div class="pagination">
+            <button id="prevPageBtn" class="action-btn" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+            <span id="currentPageInfo">Página 1</span>
+            <button id="nextPageBtn" class="action-btn">Siguiente <i class="fas fa-chevron-right"></i></button>
+        </div>
+    </main>
+
+    <script type="module" src="scripts/historial.js"></script>
