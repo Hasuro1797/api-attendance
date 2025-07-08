@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WES PERÚ - Reportes</title>
+    <!-- Incluir los estilos principales compartidos (tu stylemain.css) -->
+    <link rel="stylesheet" href="assets/styles/stylemain.css" />
+    <!-- Estilos específicos para la página de reportes -->
+    <link rel="stylesheet" href="assets/styles/reportes.css" />
+    <!-- Font Awesome para iconos profesionales (si no lo tienes ya) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+    <!-- HEADER - COPIA EXACTA DE TU main.html -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="assets/images/logo-wes.png" alt="WES PERÚ Logo" /> <!-- Asegúrate de que la ruta de tu logo sea correcta -->
+            </div>
+            <div class="user-menu">
+                <div class="user-info">
+                    <span id="userName"></span> <!-- ID 'userName' como en tu main.html -->
+                </div>
+                <div class="user-avatar" id="userAvatar"></div> <!-- ID 'userAvatar' como en tu main.html -->
+            </div>
+        </div>
+    </header>
+
+    <!-- SIDEBAR - COPIA EXACTA DE TU main.html -->
+    <aside class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="sidebar-menu-item">
+                <a href="main.html">
+                    <div class="menu-item-content">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </div>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="markAttendance.html">
+                    <div class="menu-item-content">
+                        <i class="fas fa-clock"></i>
+                        <span>Marcar Asistencia</span>
+                    </div>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="historial.html">
+                    <div class="menu-item-content">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Mi Historial</span>
+                    </div>
+                </a>
+            </li>
+            <li class="sidebar-menu-item active"> <!-- Clase 'active' para Reportes -->
+                <a href="reportes.html">
+                    <div class="menu-item-content">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Reportes</span>
+                    </div>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="Configuracion.html">
+                    <div class="menu-item-content">
+                        <i class="fas fa-cog"></i>
+                        <span>Configuración</span>
+                    </div>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <button id="logoutBtn" class="menu-item-content logout-btn" type="button">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Cerrar Sesión</span>
+                </button>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT - Aquí va el contenido específico de reportes -->
+    <main class="main-content">
+        <h1 class="page-title">Reportes de Asistencia</h1>
+        <p class="page-description">Genera y visualiza reportes detallados de asistencia con gráficos.</p>
+
+        <div class="report-filters card">
+            <h3>Filtros de Reporte</h3>
+            <div class="filter-grid">
+                <div class="form-group">
+                    <label for="startDate">Desde:</label>
+                    <input type="date" id="startDate" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="endDate">Hasta:</label>
+                    <input type="date" id="endDate" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="searchUser">Buscar Usuario:</label>
+                    <input type="text" id="searchUser" placeholder="Nombre o email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="departmentFilter">Departamento:</label>
+                    <select id="departmentFilter" class="form-control">
+                        <option value="">Todos los Departamentos</option>
+                        <!-- Opciones de departamentos se cargarán dinámicamente -->
+                    </select>
+                </div>
+            </div>
+            <div class="filter-actions">
+                <button id="applyFiltersBtn" class="btn btn-primary"><i class="fas fa-filter"></i> Aplicar Filtros</button>
+                <button id="resetFiltersBtn" class="btn btn-secondary"><i class="fas fa-undo"></i> Limpiar Filtros</button>
+                <button id="exportCsvBtn" class="btn btn-success"><i class="fas fa-file-csv"></i> Exportar CSV</button>
+                <button id="exportPdfBtn" class="btn btn-info"><i class="fas fa-file-pdf"></i> Exportar PDF</button>
+            </div>
+        </div>
+
+        <div class="report-charts card">
+            <h3>Resumen Gráfico</h3>
+            <div class="chart-container">
+                <canvas id="attendanceChart"></canvas>
+            </div>
+        </div>
+
+        <div class="report-results card">
+            <h3>Resultados Detallados</h3>
+            <div class="table-responsive">
+                <table class="data-table" id="attendanceReportTable">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>Usuario</th>
+                            <th>Email</th>
+                            <th>Departamento</th>
+                            <th>Estado</th>
+                            <th>Hora Entrada</th>
+                            <th>Hora Salida</th>
+                            <th>Horas Trabajadas</th>
+                            <th>Modalidad</th>
+                            <th>IP</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reportTableBody">
+                        <!-- Datos de reportes se cargarán aquí -->
+                        <tr><td colspan="10" class="loading-row">Cargando datos...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination-controls">
+                <button id="prevPageBtn" class="btn btn-pagination" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+                <span id="currentPageInfo">Página 1 de 1</span>
+                <button id="nextPageBtn" class="btn btn-pagination" disabled>Siguiente <i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Librerías JS -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://unpkg.com/jspdf-autotable@3.8.2/dist/jspdf.plugin.autotable.js"></script> 
+
+    <script type="module" src="scripts/reportes.js"></script>
+    ```
+    <!-- Script para inicializar la cabecera, ahora dentro de reportes.js -->
+    <script type="module">
+        // Este bloque ya no necesita importar renderUserAvatar aquí,
+        // ya que reportes.js lo manejará internamente.
+        // Solo asegúrate de que reportes.js se cargue y ejecute su lógica de inicialización.
+    </script>
+</body>
+</html>

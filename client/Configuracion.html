@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WES PERÚ - Configuración</title>
+    <!-- Incluir los estilos principales compartidos -->
+    <link rel="stylesheet" href="assets/styles/stylemain.css" />
+    <!-- Estilos específicos para la página de configuración -->
+    <link rel="stylesheet" href="assets/styles/configuracion.css" />
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="assets/images/logo-wes.png" alt="WES PERÚ Logo" />
+            </div>
+            <div class="user-menu">
+                <div class="user-info">
+                    <span id="userName"></span>
+                </div>
+                <div class="user-avatar" id="userAvatar"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <ul class="sidebar-menu">
+            <li class="sidebar-menu-item">
+                <a href="main.html">
+                    <div class="menu-item-content">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </div>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="markAttendance.html">
+                    <div class="menu-item-content">
+                        <i class="fas fa-clock"></i>
+                        <span>Marcar Asistencia</span>
+                    </div>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="historial.html">
+                    <div class="menu-item-content">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Mi Historial</span>
+                    </div>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <a href="reportes.html">
+                    <div class="menu-item-content">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Reportes</span>
+                    </div>
+                </a>
+            </li>
+            <li class="sidebar-menu-item active">
+                <a href="Configuracion.html">
+                    <div class="menu-item-content">
+                        <i class="fas fa-cog"></i>
+                        <span>Configuración</span>
+                    </div>
+                </a>
+            </li>
+            <li class="sidebar-menu-item">
+                <button id="logoutBtn" class="menu-item-content logout-btn" type="button">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Cerrar Sesión</span>
+                </button>
+            </li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        <h1 class="page-title">Configuración del Sistema</h1>
+        <p class="page-description">Administra la configuración general, usuarios y reglas de red del sistema.</p>
+
+        <!-- Tabs Navigation -->
+        <div class="tabs-nav">
+            <button class="tab-btn active" data-tab="general">
+                <i class="fas fa-sliders-h"></i>
+                Configuración General
+            </button>
+            <button class="tab-btn" data-tab="users">
+                <i class="fas fa-users"></i>
+                Gestión de Usuarios
+            </button>
+            <button class="tab-btn" data-tab="network">
+                <i class="fas fa-network-wired"></i>
+                Reglas de Red
+            </button>
+        </div>
+
+        <!-- Tab Content: Configuración General -->
+        <div class="tab-content active" id="general-tab">
+            <div class="card">
+                <h3>Configuración de Horarios</h3>
+                <form id="configForm">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="startTime">Hora de Inicio:</label>
+                            <input type="time" id="startTime" name="startTime" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="endTime">Hora de Fin:</label>
+                            <input type="time" id="endTime" name="endTime" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="toleranceMin">Tolerancia (minutos):</label>
+                            <input type="number" id="toleranceMin" name="toleranceMin" class="form-control" min="0" max="60" required>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Guardar Configuración
+                        </button>
+                        <button type="button" id="resetConfigBtn" class="btn btn-secondary">
+                            <i class="fas fa-undo"></i> Restablecer
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tab Content: Gestión de Usuarios -->
+        <div class="tab-content" id="users-tab">
+            <div class="card">
+                <h3>Gestión de Usuarios</h3>
+                <div class="users-actions">
+                    <button id="addUserBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Agregar Usuario
+                    </button>
+                    <div class="search-box">
+                        <input type="text" id="userSearch" placeholder="Buscar usuario..." class="form-control">
+                        <i class="fas fa-search"></i>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table" id="usersTable">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Email</th>
+                                <th>Teléfono</th>
+                                <th>Departamento</th>
+                                <th>Modalidad</th>
+                                <th>Rol</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <tr><td colspan="7" class="loading-row">Cargando usuarios...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination-controls">
+                    <button id="prevUsersBtn" class="btn btn-pagination" disabled>
+                        <i class="fas fa-chevron-left"></i> Anterior
+                    </button>
+                    <span id="usersPageInfo">Página 1 de 1</span>
+                    <button id="nextUsersBtn" class="btn btn-pagination" disabled>
+                        Siguiente <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content: Reglas de Red -->
+        <div class="tab-content" id="network-tab">
+            <div class="card">
+                <h3>Reglas de Red</h3>
+                <div class="network-actions">
+                    <button id="addNetworkRuleBtn" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Agregar Regla
+                    </button>
+                </div>
+                <div class="table-responsive">
+                    <table class="data-table" id="networkRulesTable">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Dirección IP</th>
+                                <th>Descripción</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="networkRulesTableBody">
+                            <tr><td colspan="5" class="loading-row">Cargando reglas...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal para Agregar/Editar Usuario -->
+    <div id="userModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="userModalTitle">Agregar Usuario</h3>
+                <button class="modal-close" id="closeUserModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="userForm">
+                <div class="modal-body">
+                    <input type="hidden" id="userId" name="userId">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="userName">Nombre:</label>
+                            <input type="text" id="userName" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userLastName">Apellido:</label>
+                            <input type="text" id="userLastName" name="lastName" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userEmail">Email:</label>
+                            <input type="email" id="userEmail" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userPhone">Teléfono:</label>
+                            <input type="tel" id="userPhone" name="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="userDepartment">Departamento:</label>
+                            <select id="userDepartment" name="department" class="form-control" required>
+                                <option value="">Seleccionar Departamento</option>
+                                <option value="Recursos Humanos">Recursos Humanos</option>
+                                <option value="Tecnología">Tecnología</option>
+                                <option value="Ventas">Ventas</option>
+                                <option value="Marketing">Marketing</option>
+                                <option value="Contabilidad">Contabilidad</option>
+                                <option value="Gerencia">Gerencia</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="userModality">Modalidad:</label>
+                            <select id="userModality" name="modality" class="form-control" required>
+                                <option value="PRESENTIAL">Presencial</option>
+                                <option value="REMOTE">Remoto</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="userRole">Rol:</label>
+                            <select id="userRole" name="role" class="form-control" required>
+                                <option value="USER">Usuario</option>
+                                <option value="ADMIN">Administrador</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="userPassword">Contraseña:</label>
+                            <input type="password" id="userPassword" name="password" class="form-control">
+                            <small class="form-text">Dejar en blanco para mantener la contraseña actual</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelUserBtn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para Agregar/Editar Regla de Red -->
+    <div id="networkModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="networkModalTitle">Agregar Regla de Red</h3>
+                <button class="modal-close" id="closeNetworkModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="networkForm">
+                <div class="modal-body">
+                    <input type="hidden" id="networkRuleId" name="networkRuleId">
+                    <div class="form-group">
+                        <label for="networkName">Nombre:</label>
+                        <input type="text" id="networkName" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="networkIp">Dirección IP:</label>
+                        <input type="text" id="networkIp" name="ip" class="form-control" required placeholder="192.168.1.1">
+                    </div>
+                    <div class="form-group">
+                        <label for="networkDescription">Descripción:</label>
+                        <textarea id="networkDescription" name="description" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="networkStatus">Estado:</label>
+                        <select id="networkStatus" name="status" class="form-control" required>
+                            <option value="ACTIVE">Activo</option>
+                            <option value="INACTIVE">Inactivo</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelNetworkBtn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content small">
+            <div class="modal-header">
+                <h3>Confirmar Acción</h3>
+            </div>
+            <div class="modal-body">
+                <p id="confirmMessage">¿Está seguro de que desea realizar esta acción?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancelConfirmBtn">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmActionBtn">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert Messages -->
+    <div id="alertContainer" class="alert-container"></div>
+
+    <script type="module" src="scripts/configuracion.js"></script>
+</body>
+</html>
