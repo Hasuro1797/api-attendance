@@ -4,14 +4,14 @@ import { PrismaService } from './prisma/prisma.service';
 import { Logger } from '@nestjs/common';
 import { endOfDay, format, isBefore, set, startOfDay } from 'date-fns';
 import { Status } from './common/enums/roles.enum';
-import Holidays from 'date-holidays';
+import * as Holidays from 'date-holidays';
 
 @Injectable()
 export class RateLimitCleanupService {
   logger = new Logger(RateLimitCleanupService.name);
   constructor(private readonly prisma: PrismaService) {}
 
-  holidays = new Holidays('PE');
+  holidays = new (Holidays as any)('PE');
 
   @Cron(CronExpression.EVERY_8_HOURS, { timeZone: 'America/Lima' })
   async cleanRevokeTokens() {
