@@ -450,6 +450,10 @@
     border-bottom: none;
 }
 
+[data-role] {
+    display: none;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .main-content {

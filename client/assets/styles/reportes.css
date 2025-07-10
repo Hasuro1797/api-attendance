@@ -290,6 +290,10 @@ canvas {
     text-align: center;
 }
 
+[data-role] {
+    display: none;
+}
+
 /* Responsive Adjustments - Adaptando a tu media query base */
 @media (max-width: 768px) {
     /* Estas reglas ya están en stylemain.css para el sidebar y main-content.

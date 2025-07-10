@@ -114,10 +114,10 @@ export class AuthService {
     //Valid password
     const isMatch = await this.userService.comparePassword(pass, password);
     if (!isMatch) return null;
-    console.log('la ip es', ip);
+
     //Valid ip
     const ipAllowed = await this.userService.ipAllowed(ip);
-    console.log('la ip permitida es', ipAllowed);
+
     //id ip allowed
     if (!ipAllowed) return null;
 

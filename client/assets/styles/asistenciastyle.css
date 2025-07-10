@@ -273,6 +273,7 @@ header {
 .status-indicator {
     width: 10px;
     height: 10px;
+    flex-shrink: 0;
     border-radius: 50%;
 }
 
@@ -295,6 +296,11 @@ header {
 
 .quick-history {
     margin-top: 40px;
+    overflow-x: auto;
+    background-color: var(--white);
+    padding: 16px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 8px;
 }
 
 .history-title {
@@ -306,6 +312,7 @@ header {
 
 .history-table {
     width: 100%;
+    min-width: 600px;
     border-collapse: collapse;
 }
 
@@ -420,7 +427,23 @@ header {
     gap: 16px;
 }
 
+[data-role] {
+    display: none;
+}
+
 @media (max-width: 768px) {
+    .page-title {
+        font-size: 28px;
+    }
+    .attendance-clock {
+        padding: 20px;
+    }
+    .current-date{
+        font-size: 16px;
+    }
+    .attendance-clock h2{
+        font-size: 20px;
+    }
     .sidebar {
         width: 70px;
     }
@@ -446,4 +469,8 @@ header {
     .current-time-display {
         font-size: 48px;
     }
+
+    .logout-btn {
+        justify-content: center;
+     }
 }

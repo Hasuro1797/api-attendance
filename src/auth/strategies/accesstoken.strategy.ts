@@ -34,7 +34,7 @@ export class AccessTokenStrategy extends PassportStrategy(Strategy, 'jwt') {
       ? forwarded[0]
       : (forwarded || '').split(',')[0];
     const rules = await this.prisma.netWorkRule.findMany();
-    console.log('la ip del cliente es', ip);
+
     const matchRule = rules.find((rule) =>
       ipRange(
         ip.toString().trim() || req.socket.remoteAddress || '',
@@ -42,7 +42,6 @@ export class AccessTokenStrategy extends PassportStrategy(Strategy, 'jwt') {
         rule.ipEnd,
       ),
     );
-    console.log('la regla que coincide es', matchRule);
 
     if (!matchRule) {
       throw new UnauthorizedException(UnauthorizedMessages.INVALID_IP);

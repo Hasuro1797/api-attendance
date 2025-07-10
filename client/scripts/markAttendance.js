@@ -428,14 +428,41 @@ async function checkOut() {
     checkOutButton.disabled = false;
   }
 }
+
+async function logOut() {
+  const token = getToken();
+  if (!token) {
+    window.location.href = '/login.html';
+  }
+  try {
+    const ip = await getIp();
+    const response = await fetch('/api/auth/signOut', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'x-forwarded-for': ip,
+      },
+      method: 'POST',
+    });
+    if (response.ok) {
+      removeToken();
+      window.location.href = '/login.html';
+    } else {
+      if (response.status === 401) {
+        removeToken();
+        window.location.href = '/login.html';
+      }
+    }
+  } catch (error) {
+    console.error('Error al cerrar sesión:', error);
+  }
+}
 window.addEventListener('DOMContentLoaded', async () => {
   renderAttendanceCard(null);
   renderUserAvatar(null);
   renderMyAttendance(null);
   renderAttendanceTable(null);
-  document.getElementById('logoutBtn').addEventListener('click', () => {
-    removeToken();
-    window.location.href = '/login.html';
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await logOut();
   });
   document.getElementById('checkInBtn').addEventListener('click', async () => {
     await checkIn();
@@ -448,6 +475,12 @@ window.addEventListener('DOMContentLoaded', async () => {
     window.location.href = '/login.html';
   }
   const user = await getProfile();
+  document.querySelectorAll('[data-role]').forEach((el) => {
+    const roles = el.dataset.role.split(',').map((r) => r.trim().toUpperCase());
+    if (roles.includes(user.role.toUpperCase())) {
+      el.style.display = 'flex';
+    }
+  });
   renderAttendanceCard(user);
   getMyAttendance();
   getMyAttendanceTable();

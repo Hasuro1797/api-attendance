@@ -123,7 +123,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 10px;
+    gap: 4px;
 }
 
 .sidebar-menu-item i {
@@ -433,8 +433,15 @@ header {
     font-weight: 500;
 }
 
+[data-role] {
+    display: none;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
+    .page-title {
+        font-size: 28px;
+    }
     .sidebar {
         width: 70px;
     }
@@ -459,5 +466,8 @@ header {
     
     .quick-actions {
         flex-wrap: wrap;
+    }
+    .logout-btn {
+       justify-content: center;
     }
 }
