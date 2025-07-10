@@ -117,4 +117,19 @@ export class AttendanceController {
   findUserByDashboard(@ActiveUser('sub') userId: string) {
     return this.attendanceService.findUserByDashboard(userId);
   }
+
+  @Auth([Roles.USER, Roles.ADMIN])
+  @ApiOperation({
+    summary: 'Información del usuario',
+    description:
+      'Solo el usuario y el admin puede obtener la información del usuario',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Información del usuario obtenida exitosamente',
+  })
+  @Get('my-attendance')
+  getMyAttendance(@ActiveUser('sub') userId: string) {
+    return this.attendanceService.getMyAttendance(userId);
+  }
 }

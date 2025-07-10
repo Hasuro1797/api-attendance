@@ -17,8 +17,10 @@
         <img src="assets/images/logo-wes.png" alt="WES PERÚ Logo" />
       </div>
       <div class="user-menu">
-        <div id="userName"></div>
-        <div id="userAvatar"></div>
+        <div class="user-info">
+            <span id="userName"></span>
+        </div>
+        <div class="user-avatar" id="userAvatar"></div>
       </div>
     </div>
   </header>
@@ -71,20 +73,28 @@
     <div class="attendance-clock-container">
       <div class="attendance-clock">
         <h2>Control de Asistencia</h2>
-        <div class="current-time-display" id="currentTime"></div>
-        <div class="current-date">Cargando fecha...</div>
-
-        <div class="attendance-action">
-          <!-- Botones dinámicos se insertarán aquí -->
+        <div class="attendance-clock-info">       
+          <p id="currentTime"></p>
+          <p id="currentDate"></p>
+          <div class="attendance-action">
+            <button class="attendance-button" id="checkInBtn" style="display: none;">
+              <i class="fa-regular fa-clock" id="checkInIcon"></i>
+              <span>Marcar Entrada</span>
+            </button>
+            <button class="attendance-button check-out" id="checkOutBtn" style="display: none;">
+              <i class="fa-regular fa-clock" id="checkOutIcon"></i>
+              <span>Marcar Salida</span>
+            </button>
+          </div>
         </div>
 
         <div class="connection-status">
-          <div class="status-indicator indicator-online"></div>
-          <span>Conectado a Red Corporativa (Oficina)</span>
+          <div id="connectionStatus"></div>
+          <span id="connectionStatusText"></span>
         </div>
 
-        <div class="status-message" style="display:none;">
-          <i class="fas fa-check-circle"></i> Entrada registrada correctamente a las <span id="horaEntrada"></span>
+        <div class="status-message" style="display:none;" id="statusMessage">
+          <i class="fas fa-check-circle"></i> Entrada registrada correctamente a las <span id="statusMessageTime"></span>
         </div>
       </div>
     </div>
@@ -97,19 +107,19 @@
         <div class="status-info-grid">
           <div class="status-info-item">
             <div class="status-info-label">Estado Actual</div>
-            <div class="status-info-value" id="estadoActual">Cargando...</div>
+            <div id="estadoActual"></div>
           </div>
           <div class="status-info-item">
             <div class="status-info-label">Hora de Entrada</div>
-            <div class="status-info-value" id="horaEntradaInfo">Cargando...</div>
+            <div id="horaEntradaInfo"></div>
           </div>
           <div class="status-info-item">
             <div class="status-info-label">Hora de Salida</div>
-            <div class="status-info-value" id="horaSalidaInfo">Cargando...</div>
+            <div id="horaSalidaInfo"></div>
           </div>
           <div class="status-info-item">
             <div class="status-info-label">Tiempo Trabajado</div>
-            <div class="status-info-value" id="tiempoTrabajado">Cargando...</div>
+            <div id="tiempoTrabajado"></div>
           </div>
         </div>
       </div>
@@ -127,8 +137,7 @@
             <th>Modalidad</th>
           </tr>
         </thead>
-        <tbody>
-          <!-- Aquí se insertará el historial dinámicamente -->
+        <tbody id="attendanceTableAttendance">
         </tbody>
       </table>
     </div>

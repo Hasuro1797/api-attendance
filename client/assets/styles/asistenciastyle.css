@@ -161,20 +161,19 @@ header {
     font-size: 64px;
     font-weight: 700;
     color: var(--dark);
-    margin: 30px 0;
+    /* margin: 12px 0; */
 }
 
 .current-date {
     font-size: 18px;
     color: var(--secondary);
-    margin-bottom: 40px;
 }
 
 .attendance-action {
-    margin-top: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 16px;
 }
 
 .attendance-button {
@@ -199,6 +198,10 @@ header {
 .attendance-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.attendance-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
 }
 
 .attendance-button i {
@@ -261,7 +264,6 @@ header {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-top: 20px;
     padding: 10px 15px;
     background-color: #f8f9fa;
     border-radius: 8px;
@@ -368,6 +370,24 @@ header {
     height: 10px;
     border-radius: 50%;
   }
+  .skeleton-time {
+    width: 120px;
+    height: 36px;
+    border-radius: 8px;
+    display: block;
+  }
+  .skeleton-date {
+    width: 150px;
+    height: 18px;
+    border-radius: 8px;
+    display: block;
+  }
+  .skeleton-button {
+    width: 100px;
+    height: 36px;
+    border-radius: 50px;
+    display: block;
+  }
   
 @keyframes skeleton-loading {
     0% {
@@ -390,6 +410,14 @@ header {
     font-size: 16px;
     padding: 15px;
     color: var(--dark);
+}
+
+.attendance-clock-info {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
 }
 
 @media (max-width: 768px) {
