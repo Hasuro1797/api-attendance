@@ -45,7 +45,7 @@ export class AuthController {
       : (forwarded || '').split(',')[0];
     return this.authService.signIn(
       signInDto,
-      ip.toString() || req.socket.remoteAddress || '',
+      ip.toString().trim() || req.socket.remoteAddress || '',
     );
   }
 

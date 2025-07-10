@@ -37,7 +37,7 @@ export class AccessTokenStrategy extends PassportStrategy(Strategy, 'jwt') {
     console.log('la ip del cliente es', ip);
     const matchRule = rules.find((rule) =>
       ipRange(
-        ip.toString() || req.socket.remoteAddress || '',
+        ip.toString().trim() || req.socket.remoteAddress || '',
         rule.ipStart,
         rule.ipEnd,
       ),
