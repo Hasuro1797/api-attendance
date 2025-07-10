@@ -27,7 +27,6 @@ export class AuthService {
       signInDto.password,
       clientip,
     );
-    console.log('el usuario es', user);
     if (!user)
       throw new UnauthorizedException(UnauthorizedMessages.INVALID_CREDENTIALS);
 
@@ -43,7 +42,6 @@ export class AuthService {
       user.id,
       true,
     );
-    console.log('el usuario actualizado es', updatedUser);
     return {
       name: updatedUser.name,
       lastName: updatedUser.lastName,
@@ -110,14 +108,12 @@ export class AuthService {
   ): Promise<User> {
     //Valid user exists
     const user = await this.userService.findUserByEmail(username);
-    console.log('el usuario encontrado es', user);
     if (!user) return null;
     const { password, ...userInfo } = user;
 
     //Valid password
     const isMatch = await this.userService.comparePassword(pass, password);
     if (!isMatch) return null;
-    console.log('la contraseña es correcta');
     console.log('la ip es', ip);
     //Valid ip
     const ipAllowed = await this.userService.ipAllowed(ip);

@@ -146,11 +146,9 @@ export class UserService {
 
   async ipAllowed(ip: string) {
     const rules = await this.prismaService.netWorkRule.findMany();
-    console.log('las reglas son', rules);
     const matchRule = rules.find((rule) =>
       ipRange(ip, rule.ipStart, rule.ipEnd),
     );
-    console.log('la regla que coincide es', matchRule);
     return matchRule;
   }
 

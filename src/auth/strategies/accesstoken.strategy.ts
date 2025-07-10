@@ -29,13 +29,18 @@ export class AccessTokenStrategy extends PassportStrategy(Strategy, 'jwt') {
       throw new UnauthorizedException(UnauthorizedMessages.INVALID_ACCESS);
     }
 
-    const clientIp =
-      req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
+    const forwarded = req.headers['x-forwarded-for'];
+    const ip = Array.isArray(forwarded)
+      ? forwarded[0]
+      : (forwarded || '').split(',')[0];
     const rules = await this.prisma.netWorkRule.findMany();
-    console.log('la ip del cliente es', clientIp);
-    console.log('las reglas son', rules);
+    console.log('la ip del cliente es', ip);
     const matchRule = rules.find((rule) =>
-      ipRange(clientIp.toString(), rule.ipStart, rule.ipEnd),
+      ipRange(
+        ip.toString() || req.socket.remoteAddress || '',
+        rule.ipStart,
+        rule.ipEnd,
+      ),
     );
     console.log('la regla que coincide es', matchRule);
 
