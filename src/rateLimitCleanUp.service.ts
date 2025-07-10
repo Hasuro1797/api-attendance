@@ -2,21 +2,31 @@ import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import { PrismaService } from './prisma/prisma.service';
 import { Logger } from '@nestjs/common';
-import { endOfDay, isBefore, set, startOfDay } from 'date-fns';
+import { endOfDay, format, isBefore, set, startOfDay } from 'date-fns';
 import { Status } from './common/enums/roles.enum';
+import Holidays from 'date-holidays';
 
 @Injectable()
 export class RateLimitCleanupService {
   logger = new Logger(RateLimitCleanupService.name);
   constructor(private readonly prisma: PrismaService) {}
 
+  holidays = new Holidays('PE');
+
   @Cron(CronExpression.EVERY_8_HOURS, { timeZone: 'America/Lima' })
   async cleanRevokeTokens() {
     await this.prisma.revokedToken.deleteMany({});
   }
 
-  @Cron(CronExpression.EVERY_2_HOURS, { timeZone: 'America/Lima' })
+  @Cron('0 */2 * * 1-5', { timeZone: 'America/Lima' })
   async checkAbsencesHourly() {
+    const now = new Date();
+    if (this.holidays.isHoliday(now)) {
+      this.logger.log(
+        `🎉 Hoy ${format(now, 'yyyy-MM-dd')} es feriado nacional en Perú. No se ejecuta la revisión.`,
+      );
+      return;
+    }
     this.logger.log('⏰ Ejecutando revisión horaria de ausencias...');
     try {
       const config = await this.prisma.config.findFirst();
