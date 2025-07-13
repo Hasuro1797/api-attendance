@@ -462,14 +462,41 @@ async function getAllUsersAttendanceToday() {
   }
 }
 
+async function logOut() {
+  const token = getToken();
+  if (!token) {
+    window.location.href = '/login.html';
+  }
+  try {
+    const ip = await getIp();
+    const response = await fetch('/api/auth/signOut', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'x-forwarded-for': ip,
+      },
+      method: 'POST',
+    });
+    if (response.ok) {
+      removeToken();
+      window.location.href = '/login.html';
+    } else {
+      if (response.status === 401) {
+        removeToken();
+        window.location.href = '/login.html';
+      }
+    }
+  } catch (error) {
+    console.error('Error al cerrar sesión:', error);
+  }
+}
+
 window.addEventListener('DOMContentLoaded', async () => {
   renderUserAvatar(null);
   renderAttendanceTable(null);
   renderAllUsersAttendance(null);
   renderDashboardInfo(null);
-  document.getElementById('logoutBtn').addEventListener('click', () => {
-    removeToken();
-    window.location.href = '/login.html';
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await logOut();
   });
   const token = getToken();
   if (!token) {
@@ -482,6 +509,12 @@ window.addEventListener('DOMContentLoaded', async () => {
   getMyAttendance();
 
   //Roles Components
+  document.querySelectorAll('[data-role]').forEach((el) => {
+    const roles = el.dataset.role.split(',').map((r) => r.trim().toUpperCase());
+    if (roles.includes(user.role.toUpperCase())) {
+      el.style.display = 'flex';
+    }
+  });
   const userTable = document.getElementById('usersTable');
   if (user.role === 'ADMIN') {
     getAllUsersAttendanceToday();

@@ -418,4 +418,22 @@ export class AttendanceService {
       },
     };
   }
+
+  async getMyAttendance(userId: string) {
+    const attendanceToday = await this.getAttendanceToday(userId);
+    const config = await this.configService.findAll();
+    if (!config.length) {
+      throw new NotFoundException(
+        'Configuración no encontrada, o no definida aún, comuniquese con el administrador',
+      );
+    }
+    return {
+      attendanceToday,
+      config: {
+        startTime: config[0]?.startTime,
+        endTime: config[0]?.endTime,
+        toleranceMin: config[0]?.toleranceMin,
+      },
+    };
+  }
 }

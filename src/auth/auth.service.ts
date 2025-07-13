@@ -117,6 +117,7 @@ export class AuthService {
 
     //Valid ip
     const ipAllowed = await this.userService.ipAllowed(ip);
+
     //id ip allowed
     if (!ipAllowed) return null;
 

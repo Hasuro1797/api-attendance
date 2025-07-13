@@ -39,9 +39,14 @@ export class AuthController {
   @ApiResponse({ status: 401, description: 'Credenciales inválidas' })
   @HttpCode(HttpStatus.OK)
   signIn(@Body() signInDto: SignInDto, @Request() req) {
-    const clientIp =
-      req.headers['x-forwarded-for'] || req.socket.remoteAddress || '';
-    return this.authService.signIn(signInDto, clientIp.toString());
+    const forwarded = req.headers['x-forwarded-for'];
+    const ip = Array.isArray(forwarded)
+      ? forwarded[0]
+      : (forwarded || '').split(',')[0];
+    return this.authService.signIn(
+      signInDto,
+      ip.toString().trim() || req.socket.remoteAddress || '',
+    );
   }
 
   @Auth([Roles.ADMIN, Roles.USER])

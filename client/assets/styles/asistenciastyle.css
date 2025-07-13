@@ -161,20 +161,19 @@ header {
     font-size: 64px;
     font-weight: 700;
     color: var(--dark);
-    margin: 30px 0;
+    /* margin: 12px 0; */
 }
 
 .current-date {
     font-size: 18px;
     color: var(--secondary);
-    margin-bottom: 40px;
 }
 
 .attendance-action {
-    margin-top: 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 16px;
 }
 
 .attendance-button {
@@ -199,6 +198,10 @@ header {
 .attendance-button:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.attendance-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
 }
 
 .attendance-button i {
@@ -261,7 +264,6 @@ header {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-top: 20px;
     padding: 10px 15px;
     background-color: #f8f9fa;
     border-radius: 8px;
@@ -271,6 +273,7 @@ header {
 .status-indicator {
     width: 10px;
     height: 10px;
+    flex-shrink: 0;
     border-radius: 50%;
 }
 
@@ -293,6 +296,11 @@ header {
 
 .quick-history {
     margin-top: 40px;
+    overflow-x: auto;
+    background-color: var(--white);
+    padding: 16px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 8px;
 }
 
 .history-title {
@@ -304,6 +312,7 @@ header {
 
 .history-table {
     width: 100%;
+    min-width: 600px;
     border-collapse: collapse;
 }
 
@@ -368,6 +377,24 @@ header {
     height: 10px;
     border-radius: 50%;
   }
+  .skeleton-time {
+    width: 120px;
+    height: 36px;
+    border-radius: 8px;
+    display: block;
+  }
+  .skeleton-date {
+    width: 150px;
+    height: 18px;
+    border-radius: 8px;
+    display: block;
+  }
+  .skeleton-button {
+    width: 100px;
+    height: 36px;
+    border-radius: 50px;
+    display: block;
+  }
   
 @keyframes skeleton-loading {
     0% {
@@ -392,7 +419,31 @@ header {
     color: var(--dark);
 }
 
+.attendance-clock-info {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+[data-role] {
+    display: none;
+}
+
 @media (max-width: 768px) {
+    .page-title {
+        font-size: 28px;
+    }
+    .attendance-clock {
+        padding: 20px;
+    }
+    .current-date{
+        font-size: 16px;
+    }
+    .attendance-clock h2{
+        font-size: 20px;
+    }
     .sidebar {
         width: 70px;
     }
@@ -418,4 +469,8 @@ header {
     .current-time-display {
         font-size: 48px;
     }
+
+    .logout-btn {
+        justify-content: center;
+     }
 }
