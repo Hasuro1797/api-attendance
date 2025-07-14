@@ -321,10 +321,12 @@ header {
 [data-role] {
     display: none;
 }
-
 @media (max-width: 992px) {
     .sidebar {
         width: 70px;
+        height: calc(100vh - 70px);
+        padding-top: 10px;
+        overflow-x: hidden;
     }
     .sidebar-menu-item span {
         display: none;
@@ -344,22 +346,71 @@ header {
     }
     .main-content {
         margin-left: 70px;
-        padding: 20px;
+        padding: 20px 15px;
     }
-    /* .header-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px;
-        max-width: 1200px;
-        margin: 0 auto;
-    } */
     .filters-section {
         flex-direction: column;
         align-items: stretch;
         gap: 15px;
     }
-    .form-group input {
+    .form-group input,
+    .form-group select,
+    .action-btn {
         width: 100%;
+    }
+    header .header-container {
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    header .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .user-menu {
+        gap: 10px;
+    }
+    .sidebar {
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        width: 100%;
+        height: 60px;
+        display: flex;
+        justify-content: space-around;
+        padding: 0;
+        box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+        overflow: visible;
+    }
+    .sidebar-menu {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        padding: 0;
+    }
+    .sidebar-menu-item {
+        padding: 10px 0;
+        flex-grow: 1;
+        justify-content: center;
+        border-left: none !important;
+        border-bottom: none !important;
+    }
+    .sidebar-menu-item span {
+        display: none;
+    }
+    .main-content {
+        margin-left: 0;
+        margin-top: 130px; /* header + bottom sidebar */
+        padding: 15px;
+    }
+    .filters-section {
+        gap: 10px;
+    }
+    .form-group input,
+    .form-group select,
+    .action-btn {
+        font-size: 14px;
     }
 }
