@@ -6,13 +6,21 @@
     <title>WES PERÚ - Configuración</title>
     <!-- Incluir los estilos principales compartidos -->
     <link rel="stylesheet" href="assets/styles/stylemain.css" />
-    <!-- Estilos específicos para la página de configuración -->
     <link rel="stylesheet" href="assets/styles/configuracion.css" />
+    <!-- Estilos específicos para la página de configuración -->
+       <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" xintegrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 </head>
+
 <body>
-    <!-- HEADER -->
+    
     <header>
         <div class="header-container">
             <div class="logo">
@@ -27,7 +35,6 @@
         </div>
     </header>
 
-    <!-- SIDEBAR -->
     <aside class="sidebar">
         <ul class="sidebar-menu">
             <li class="sidebar-menu-item">
@@ -81,95 +88,122 @@
 
     <!-- MAIN CONTENT -->
     <main class="main-content">
-        <h1 class="page-title">Configuración del Sistema</h1>
-        <p class="page-description">Administra la configuración general, usuarios y reglas de red del sistema.</p>
+        <div class="page-header">
+            <h1 class="page-title">Configuración del Sistema</h1>
+            <p class="page-description">Administra la configuración general, usuarios y reglas de red del sistema.</p>
+        </div>
 
         <!-- Tabs Navigation -->
-        <div class="tabs-nav">
-            <button class="tab-btn active" data-tab="general">
-                <i class="fas fa-sliders-h"></i>
-                Configuración General
-            </button>
-            <button class="tab-btn" data-tab="users">
-                <i class="fas fa-users"></i>
-                Gestión de Usuarios
-            </button>
-            <button class="tab-btn" data-tab="network">
-                <i class="fas fa-network-wired"></i>
-                Reglas de Red
-            </button>
+        <div class="tabs-container">
+            <nav class="tabs-nav">
+                <button class="tab-btn active" data-tab="general" aria-label="Ver configuración general">
+                    <i class="fas fa-sliders-h"></i>
+                    <span>General</span>
+                </button>
+                <button class="tab-btn" data-tab="users" aria-label="Ver gestión de usuarios">
+                    <i class="fas fa-users"></i>
+                    <span>Usuarios</span>
+                </button>
+                <button class="tab-btn" data-tab="network" aria-label="Ver reglas de red">
+                    <i class="fas fa-network-wired"></i>
+                    <span>Red</span>
+                </button>
+            </nav>
         </div>
 
         <!-- Tab Content: Configuración General -->
         <div class="tab-content active" id="general-tab">
             <div class="card">
-                <h3>Configuración de Horarios</h3>
-                <form id="configForm">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label for="startTime">Hora de Inicio:</label>
-                            <input type="time" id="startTime" name="startTime" class="form-control" required>
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-clock"></i>
+                        Configuración de Horarios
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form id="configForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="startTime" class="form-label">Hora de Inicio</label>
+                                <input type="time" id="startTime" name="startTime" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="endTime" class="form-label">Hora de Fin</label>
+                                <input type="time" id="endTime" name="endTime" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="toleranceMin" class="form-label">Tolerancia (minutos)</label>
+                                <input type="number" id="toleranceMin" name="toleranceMin" class="form-control" min="0" max="60" required>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="endTime">Hora de Fin:</label>
-                            <input type="time" id="endTime" name="endTime" class="form-control" required>
+                        <div class="form-actions">
+                             <button type="button" id="resetConfigBtn" class="btn btn-secondary">
+                                <i class="fas fa-undo"></i>
+                                <span>Restablecer</span>
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                <span>Guardar</span>
+                            </button>
                         </div>
-                        <div class="form-group">
-                            <label for="toleranceMin">Tolerancia (minutos):</label>
-                            <input type="number" id="toleranceMin" name="toleranceMin" class="form-control" min="0" max="60" required>
-                        </div>
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Guardar Configuración
-                        </button>
-                        <button type="button" id="resetConfigBtn" class="btn btn-secondary">
-                            <i class="fas fa-undo"></i> Restablecer
-                        </button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
 
         <!-- Tab Content: Gestión de Usuarios -->
         <div class="tab-content" id="users-tab">
             <div class="card">
-                <h3>Gestión de Usuarios</h3>
-                <div class="users-actions">
-                    <button id="addUserBtn" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> Agregar Usuario
-                    </button>
-                    <div class="search-box">
-                        <input type="text" id="userSearch" placeholder="Buscar usuario..." class="form-control">
-                        <i class="fas fa-search"></i>
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-users"></i>
+                        Gestión de Usuarios
+                    </h3>
+                    <div class="card-actions">
+                        <button id="addUserBtn" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                            <span>Agregar Usuario</span>
+                        </button>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="data-table" id="usersTable">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Email</th>
-                                <th>Teléfono</th>
-                                <th>Departamento</th>
-                                <th>Modalidad</th>
-                                <th>Rol</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="usersTableBody">
-                            <tr><td colspan="7" class="loading-row">Cargando usuarios...</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="pagination-controls">
-                    <button id="prevUsersBtn" class="btn btn-pagination" disabled>
-                        <i class="fas fa-chevron-left"></i> Anterior
-                    </button>
-                    <span id="usersPageInfo">Página 1 de 1</span>
-                    <button id="nextUsersBtn" class="btn btn-pagination" disabled>
-                        Siguiente <i class="fas fa-chevron-right"></i>
-                    </button>
+                <div class="card-body">
+                    <div class="table-controls">
+                        <div class="search-container">
+                            <i class="fas fa-search search-icon"></i>
+                            <input type="text" id="userSearch" placeholder="Buscar por nombre, email, etc..." class="form-control search-input">
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="data-table" id="usersTable">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Teléfono</th>
+                                    <th>Departamento</th>
+                                    <th>Modalidad</th>
+                                    <th>Rol</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="usersTableBody">
+                                <tr><td colspan="7" class="loading-row">Cargando usuarios...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="pagination-container">
+                        <div class="pagination-controls">
+                            <button id="prevUsersBtn" class="btn btn-pagination" disabled>
+                                <i class="fas fa-chevron-left"></i>
+                                <span>Anterior</span>
+                            </button>
+                            <span id="usersPageInfo" class="page-info">Página 1 de 1</span>
+                            <button id="nextUsersBtn" class="btn btn-pagination" disabled>
+                                <span>Siguiente</span>
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -177,27 +211,35 @@
         <!-- Tab Content: Reglas de Red -->
         <div class="tab-content" id="network-tab">
             <div class="card">
-                <h3>Reglas de Red</h3>
-                <div class="network-actions">
-                    <button id="addNetworkRuleBtn" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> Agregar Regla
-                    </button>
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-network-wired"></i>
+                        Reglas de Red
+                    </h3>
+                    <div class="card-actions">
+                        <button id="addNetworkRuleBtn" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                            <span>Agregar Regla</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="data-table" id="networkRulesTable">
-                        <thead>
-                            <tr>
-                                <th>Nombre</th>
-                                <th>Dirección IP</th>
-                                <th>Descripción</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="networkRulesTableBody">
-                            <tr><td colspan="5" class="loading-row">Cargando reglas...</td></tr>
-                        </tbody>
-                    </table>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="data-table" id="networkRulesTable">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Dirección IP</th>
+                                    <th>Descripción</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="networkRulesTableBody">
+                                <tr><td colspan="5" class="loading-row">Cargando reglas...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -205,37 +247,38 @@
 
     <!-- Modal para Agregar/Editar Usuario -->
     <div id="userModal" class="modal">
+        <div class="modal-overlay"></div>
         <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="userModalTitle">Agregar Usuario</h3>
-                <button class="modal-close" id="closeUserModal">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
             <form id="userForm">
+                <div class="modal-header">
+                    <h3 id="userModalTitle" class="modal-title">Agregar Usuario</h3>
+                    <button type="button" class="modal-close" id="closeUserModal" aria-label="Cerrar modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
                 <div class="modal-body">
                     <input type="hidden" id="userId" name="userId">
-                    <div class="form-grid">
+                    <div class="form-row">
                         <div class="form-group">
-                            <label for="userName">Nombre:</label>
-                            <input type="text" id="userName" name="name" class="form-control" required>
+                            <label for="modalUserName" class="form-label">Nombre</label>
+                            <input type="text" id="modalUserName" name="name" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="userLastName">Apellido:</label>
+                            <label for="userLastName" class="form-label">Apellido</label>
                             <input type="text" id="userLastName" name="lastName" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="userEmail">Email:</label>
+                            <label for="userEmail" class="form-label">Email</label>
                             <input type="email" id="userEmail" name="email" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="userPhone">Teléfono:</label>
+                            <label for="userPhone" class="form-label">Teléfono</label>
                             <input type="tel" id="userPhone" name="phone" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="userDepartment">Departamento:</label>
+                            <label for="userDepartment" class="form-label">Departamento</label>
                             <select id="userDepartment" name="department" class="form-control" required>
-                                <option value="">Seleccionar Departamento</option>
+                                <option value="">Seleccionar...</option>
                                 <option value="Recursos Humanos">Recursos Humanos</option>
                                 <option value="Tecnología">Tecnología</option>
                                 <option value="Ventas">Ventas</option>
@@ -245,30 +288,34 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="userModality">Modalidad:</label>
+                            <label for="userModality" class="form-label">Modalidad</label>
                             <select id="userModality" name="modality" class="form-control" required>
                                 <option value="PRESENTIAL">Presencial</option>
                                 <option value="REMOTE">Remoto</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="userRole">Rol:</label>
+                            <label for="userRole" class="form-label">Rol</label>
                             <select id="userRole" name="role" class="form-control" required>
                                 <option value="USER">Usuario</option>
                                 <option value="ADMIN">Administrador</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label for="userPassword">Contraseña:</label>
+                        <div class="form-group form-group-full">
+                            <label for="userPassword" class="form-label">Contraseña</label>
                             <input type="password" id="userPassword" name="password" class="form-control">
-                            <small class="form-text">Dejar en blanco para mantener la contraseña actual</small>
+                            <small class="form-text">Dejar en blanco para no cambiar la contraseña.</small>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="cancelUserBtn">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" id="cancelUserBtn">
+                        <i class="fas fa-times"></i>
+                        <span>Cancelar</span>
+                    </button>
                     <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save"></i> Guardar
+                        <i class="fas fa-save"></i>
+                        <span>Guardar</span>
                     </button>
                 </div>
             </form>
@@ -277,40 +324,47 @@
 
     <!-- Modal para Agregar/Editar Regla de Red -->
     <div id="networkModal" class="modal">
+        <div class="modal-overlay"></div>
         <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="networkModalTitle">Agregar Regla de Red</h3>
-                <button class="modal-close" id="closeNetworkModal">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
             <form id="networkForm">
+                <div class="modal-header">
+                    <h3 id="networkModalTitle" class="modal-title">Agregar Regla de Red</h3>
+                    <button type="button" class="modal-close" id="closeNetworkModal" aria-label="Cerrar modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
                 <div class="modal-body">
                     <input type="hidden" id="networkRuleId" name="networkRuleId">
-                    <div class="form-group">
-                        <label for="networkName">Nombre:</label>
-                        <input type="text" id="networkName" name="name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="networkIp">Dirección IP:</label>
-                        <input type="text" id="networkIp" name="ip" class="form-control" required placeholder="192.168.1.1">
-                    </div>
-                    <div class="form-group">
-                        <label for="networkDescription">Descripción:</label>
-                        <textarea id="networkDescription" name="description" class="form-control" rows="3"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="networkStatus">Estado:</label>
-                        <select id="networkStatus" name="status" class="form-control" required>
-                            <option value="ACTIVE">Activo</option>
-                            <option value="INACTIVE">Inactivo</option>
-                        </select>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="networkName" class="form-label">Nombre</label>
+                            <input type="text" id="networkName" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="networkIp" class="form-label">Dirección IP</label>
+                            <input type="text" id="networkIp" name="ip" class="form-control" required placeholder="192.168.1.1">
+                        </div>
+                        <div class="form-group form-group-full">
+                            <label for="networkDescription" class="form-label">Descripción</label>
+                            <textarea id="networkDescription" name="description" class="form-control" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="networkStatus" class="form-label">Estado</label>
+                            <select id="networkStatus" name="status" class="form-control" required>
+                                <option value="ACTIVE">Activo</option>
+                                <option value="INACTIVE">Inactivo</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="cancelNetworkBtn">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" id="cancelNetworkBtn">
+                        <i class="fas fa-times"></i>
+                        <span>Cancelar</span>
+                    </button>
                     <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save"></i> Guardar
+                        <i class="fas fa-save"></i>
+                        <span>Guardar</span>
                     </button>
                 </div>
             </form>
@@ -319,23 +373,29 @@
 
     <!-- Modal de Confirmación -->
     <div id="confirmModal" class="modal">
-        <div class="modal-content small">
+        <div class="modal-overlay"></div>
+        <div class="modal-content modal-small">
             <div class="modal-header">
-                <h3>Confirmar Acción</h3>
+                <h3 class="modal-title">Confirmar Acción</h3>
             </div>
             <div class="modal-body">
-                <p id="confirmMessage">¿Está seguro de que desea realizar esta acción?</p>
+                <p id="confirmMessage" class="text-center">¿Está seguro de que desea realizar esta acción?</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="cancelConfirmBtn">Cancelar</button>
-                <button type="button" class="btn btn-danger" id="confirmActionBtn">Confirmar</button>
+                <button type="button" class="btn btn-secondary" id="cancelConfirmBtn">
+                    <i class="fas fa-times"></i>
+                    <span>Cancelar</span>
+                </button>
+                <button type="button" class="btn btn-danger" id="confirmActionBtn">
+                    <i class="fas fa-check"></i>
+                    <span>Confirmar</span>
+                </button>
             </div>
         </div>
     </div>
 
-    <!-- Alert Messages -->
+    <!-- Contenedor para Alertas/Notificaciones -->
     <div id="alertContainer" class="alert-container"></div>
-
     <script type="module" src="scripts/configuracion.js"></script>
 </body>
 </html>
