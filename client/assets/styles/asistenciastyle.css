@@ -473,4 +473,10 @@ header {
     .logout-btn {
         justify-content: center;
      }
+
+    .attendance-button{
+        font-size: 16px;
+        padding: 10px 16px;
+        align-items: center;
+    }
 }

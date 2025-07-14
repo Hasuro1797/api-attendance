@@ -19,9 +19,9 @@ import { ApiResponse } from '@nestjs/swagger';
 import { ApiOperation } from '@nestjs/swagger';
 import { QueryDto } from 'src/common/dto';
 
+@Auth([Roles.ADMIN])
 @ApiTags('Networkrule')
 @ApiBearerAuth('accessToken')
-@Auth([Roles.ADMIN])
 @ApiHeader({
   name: 'x-forwarded-for',
   description: 'IP del cliente (para determinar modalidad)',

@@ -29,6 +29,7 @@ body {
 .login-container {
     height: 100vh;
     display: flex;
+    padding: 16px;
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, #0056b3 0%, #00a0e9 100%);

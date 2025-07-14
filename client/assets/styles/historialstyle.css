@@ -79,14 +79,12 @@ header {
     width: 250px;
     background-color: var(--dark);
     color: var(--light);
-    height: calc(100vh - 70px);
+    height: 100vh;
     position: fixed;
     top: 70px;
     left: 0;
     padding-top: 20px;
-    transition: all 0.3s ease;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    overflow-y: auto;
+    transition: all 0.3s;
 }
 .sidebar-menu {
     list-style: none;
@@ -95,48 +93,33 @@ header {
 .sidebar-menu-item {
     padding: 15px 20px;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 .sidebar-menu-item i {
     width: 20px;
     text-align: center;
-    font-size: 18px;
-}
-.sidebar-menu-item span {
-    font-size: 16px;
-    font-weight: 500;
 }
 .sidebar-menu-item:hover {
     background-color: #4a5258;
-    color: var(--white);
 }
 .sidebar-menu-item.active {
     background-color: var(--primary);
-    color: var(--white);
-    border-left: 5px solid var(--success);
-    padding-left: 15px;
 }
 .logout-btn {
     width: 100%;
     background-color: transparent;
-    color: var(--light);
+    color: var(--white);
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.3s;
     font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 12px;
-    padding: 15px 20px;
-    text-align: left;
-}
-.logout-btn:hover {
-    background-color: var(--danger);
-    color: var(--white);
+    gap: 10px;
 }
 .main-content {
     margin-left: 250px;
@@ -162,6 +145,9 @@ header {
     box-shadow: var(--shadow-medium);
     padding: 25px;
     margin-bottom: 25px;
+}
+.table-card{
+    overflow-x: auto;
 }
 .filters-section {
     display: flex;
@@ -232,6 +218,7 @@ header {
 }
 .attendance-table {
     width: 100%;
+    min-width: 800px;
     border-collapse: collapse;
     margin-top: 15px;
 }
@@ -364,46 +351,24 @@ header {
 }
 
 @media (max-width: 576px) {
-    header .header-container {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-    .user-menu {
-        gap: 10px;
+    .page-title {
+        font-size: 28px;
     }
     .sidebar {
-        position: fixed;
-        bottom: 0;
-        top: auto;
-        width: 100%;
-        height: 60px;
-        display: flex;
-        justify-content: space-around;
-        padding: 0;
-        box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
-        overflow: visible;
+        width: 70px;
     }
-    .sidebar-menu {
-        display: flex;
-        width: 100%;
-        justify-content: space-around;
-        padding: 0;
-    }
-    .sidebar-menu-item {
-        padding: 10px 0;
-        flex-grow: 1;
-        justify-content: center;
-        border-left: none !important;
-        border-bottom: none !important;
-    }
+    
     .sidebar-menu-item span {
         display: none;
     }
+    
+    .sidebar-menu-item {
+        justify-content: center;
+        padding: 15px 0;
+    }
     .main-content {
-        margin-left: 0;
-        margin-top: 130px; /* header + bottom sidebar */
-        padding: 15px;
+        margin-left: 70px;
+        padding: 20px;
     }
     .filters-section {
         gap: 10px;
@@ -413,4 +378,7 @@ header {
     .action-btn {
         font-size: 14px;
     }
+    .logout-btn {
+        justify-content: center;
+     }
 }

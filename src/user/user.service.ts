@@ -81,6 +81,7 @@ export class UserService {
         role: true,
         modality: true,
         department: true,
+        phone: true,
         createdAt: true,
         updatedAt: true,
       },

@@ -195,11 +195,9 @@
                         <div class="pagination-controls">
                             <button id="prevUsersBtn" class="btn btn-pagination" disabled>
                                 <i class="fas fa-chevron-left"></i>
-                                <span>Anterior</span>
                             </button>
                             <span id="usersPageInfo" class="page-info">Página 1 de 1</span>
                             <button id="nextUsersBtn" class="btn btn-pagination" disabled>
-                                <span>Siguiente</span>
                                 <i class="fas fa-chevron-right"></i>
                             </button>
                         </div>
@@ -230,8 +228,7 @@
                                 <tr>
                                     <th>Nombre</th>
                                     <th>Dirección IP</th>
-                                    <th>Descripción</th>
-                                    <th>Estado</th>
+                                    <th>Modalidad</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -247,149 +244,145 @@
 
     <!-- Modal para Agregar/Editar Usuario -->
     <div id="userModal" class="modal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content">
-            <form id="userForm">
-                <div class="modal-header">
-                    <h3 id="userModalTitle" class="modal-title">Agregar Usuario</h3>
-                    <button type="button" class="modal-close" id="closeUserModal" aria-label="Cerrar modal">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" id="userId" name="userId">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="modalUserName" class="form-label">Nombre</label>
-                            <input type="text" id="modalUserName" name="name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="userLastName" class="form-label">Apellido</label>
-                            <input type="text" id="userLastName" name="lastName" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="userEmail" class="form-label">Email</label>
-                            <input type="email" id="userEmail" name="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="userPhone" class="form-label">Teléfono</label>
-                            <input type="tel" id="userPhone" name="phone" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="userDepartment" class="form-label">Departamento</label>
-                            <select id="userDepartment" name="department" class="form-control" required>
-                                <option value="">Seleccionar...</option>
-                                <option value="Recursos Humanos">Recursos Humanos</option>
-                                <option value="Tecnología">Tecnología</option>
-                                <option value="Ventas">Ventas</option>
-                                <option value="Marketing">Marketing</option>
-                                <option value="Contabilidad">Contabilidad</option>
-                                <option value="Gerencia">Gerencia</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="userModality" class="form-label">Modalidad</label>
-                            <select id="userModality" name="modality" class="form-control" required>
-                                <option value="PRESENTIAL">Presencial</option>
-                                <option value="REMOTE">Remoto</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="userRole" class="form-label">Rol</label>
-                            <select id="userRole" name="role" class="form-control" required>
-                                <option value="USER">Usuario</option>
-                                <option value="ADMIN">Administrador</option>
-                            </select>
-                        </div>
-                        <div class="form-group form-group-full">
-                            <label for="userPassword" class="form-label">Contraseña</label>
-                            <input type="password" id="userPassword" name="password" class="form-control">
-                            <small class="form-text">Dejar en blanco para no cambiar la contraseña.</small>
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <form id="userForm">
+                    <div class="modal-header">
+                        <h3 id="userModalTitle" class="modal-title">Agregar Usuario</h3>
+                        <button type="button" class="modal-close" id="closeUserModal" aria-label="Cerrar modal">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="userId" name="userId">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="userFormName" class="form-label">Nombre</label>
+                                <input type="text" id="userFormName" name="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="userLastName" class="form-label">Apellido</label>
+                                <input type="text" id="userLastName" name="lastName" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="userEmail" class="form-label">Email</label>
+                                <input type="email" id="userEmail" name="email" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="userPhone" class="form-label">Teléfono</label>
+                                <input type="tel" id="userPhone" name="phone" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="userDepartment" class="form-label">Departamento</label>
+                                <select id="userDepartment" name="department" class="form-control" required>
+                                    <option value="">Seleccionar...</option>
+                                    <option value="Recursos Humanos">Recursos Humanos</option>
+                                    <option value="Tecnología">Tecnología</option>
+                                    <option value="Ventas">Ventas</option>
+                                    <option value="Marketing">Marketing</option>
+                                    <option value="Contabilidad">Contabilidad</option>
+                                    <option value="Gerencia">Gerencia</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="userModality" class="form-label">Modalidad</label>
+                                <select id="userModality" name="modality" class="form-control" required>
+                                    <option value="PRESENTIAL">Presencial</option>
+                                    <option value="REMOTE">Remoto</option>
+                                </select>
+                            </div>
+                            <div class="form-group form-group-full">
+                                <label for="userPassword" class="form-label">Contraseña</label>
+                                <input type="password" id="userPassword" name="password" class="form-control">
+                                <small class="form-text">Dejar en blanco para no cambiar la contraseña.</small>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="cancelUserBtn">
-                        <i class="fas fa-times"></i>
-                        <span>Cancelar</span>
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save"></i>
-                        <span>Guardar</span>
-                    </button>
-                </div>
-            </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelUserBtn">
+                            <i class="fas fa-times"></i>
+                            <span>Cancelar</span>
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            <span>Guardar</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
     <!-- Modal para Agregar/Editar Regla de Red -->
     <div id="networkModal" class="modal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content">
-            <form id="networkForm">
-                <div class="modal-header">
-                    <h3 id="networkModalTitle" class="modal-title">Agregar Regla de Red</h3>
-                    <button type="button" class="modal-close" id="closeNetworkModal" aria-label="Cerrar modal">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" id="networkRuleId" name="networkRuleId">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="networkName" class="form-label">Nombre</label>
-                            <input type="text" id="networkName" name="name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="networkIp" class="form-label">Dirección IP</label>
-                            <input type="text" id="networkIp" name="ip" class="form-control" required placeholder="192.168.1.1">
-                        </div>
-                        <div class="form-group form-group-full">
-                            <label for="networkDescription" class="form-label">Descripción</label>
-                            <textarea id="networkDescription" name="description" class="form-control" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="networkStatus" class="form-label">Estado</label>
-                            <select id="networkStatus" name="status" class="form-control" required>
-                                <option value="ACTIVE">Activo</option>
-                                <option value="INACTIVE">Inactivo</option>
-                            </select>
+        <div class="modal-overlay">
+            <div class="modal-content">
+                <form id="networkForm">
+                    <div class="modal-header">
+                        <h3 id="networkModalTitle" class="modal-title">Agregar Regla de Red</h3>
+                        <button type="button" class="modal-close" id="closeNetworkModal" aria-label="Cerrar modal">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" id="networkRuleId" name="networkRuleId">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="networkName" class="form-label">Nombre</label>
+                                <input type="text" id="networkName" name="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="networkIpStart" class="form-label">IP Inicial</label>
+                                <input type="text" id="networkIpStart" name="ipStart" class="form-control" required placeholder="192.168.1.1">
+                            </div>
+                            <div class="form-group">
+                                <label for="networkIpEnd" class="form-label">IP Final</label>
+                                <input type="text" id="networkIpEnd" name="ipEnd" class="form-control" required placeholder="192.168.1.1">
+                            </div>
+                            <div class="form-group">
+                                <label for="networkModality" class="form-label">Modalidad</label>
+                                <select id="networkModality" name="modality" class="form-control" required>
+                                    <option value="PRESENTIAL">Presencial</option>
+                                    <option value="REMOTE">Remoto</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" id="cancelNetworkBtn">
-                        <i class="fas fa-times"></i>
-                        <span>Cancelar</span>
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save"></i>
-                        <span>Guardar</span>
-                    </button>
-                </div>
-            </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="cancelNetworkBtn">
+                            <i class="fas fa-times"></i>
+                            <span>Cancelar</span>
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            <span>Guardar</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 
     <!-- Modal de Confirmación -->
     <div id="confirmModal" class="modal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content modal-small">
-            <div class="modal-header">
-                <h3 class="modal-title">Confirmar Acción</h3>
-            </div>
-            <div class="modal-body">
-                <p id="confirmMessage" class="text-center">¿Está seguro de que desea realizar esta acción?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" id="cancelConfirmBtn">
-                    <i class="fas fa-times"></i>
-                    <span>Cancelar</span>
-                </button>
-                <button type="button" class="btn btn-danger" id="confirmActionBtn">
-                    <i class="fas fa-check"></i>
-                    <span>Confirmar</span>
-                </button>
+        <div class="modal-overlay">
+            <div class="modal-content modal-small">
+                <div class="modal-header">
+                    <h3 class="modal-title">Confirmar Acción</h3>
+                </div>
+                <div class="modal-body">
+                    <p id="confirmMessage" class="text-center">¿Está seguro de que desea realizar esta acción?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancelConfirmBtn">
+                        <i class="fas fa-times"></i>
+                        <span>Cancelar</span>
+                    </button>
+                    <button type="button" class="btn btn-danger" id="confirmActionBtn">
+                        <i class="fas fa-check"></i>
+                        <span>Confirmar</span>
+                    </button>
+                </div>
             </div>
         </div>
     </div>

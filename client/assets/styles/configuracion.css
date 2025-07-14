@@ -473,6 +473,9 @@ select.form-control {
 .modal-overlay {
     position: absolute;
     inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: rgba(0,0,0,0.5);
     animation: fadeIn 0.3s ease;
 }
@@ -483,6 +486,7 @@ select.form-control {
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-lg);
     width: 100%;
+    overflow: hidden;
     max-width: 800px;
     max-height: 90vh;
     display: flex;
@@ -570,9 +574,21 @@ select.form-control {
     animation: slideInRight 0.5s ease;
 }
 
-.alert.success { background-color: var(--success-color); }
-.alert.error { background-color: var(--danger-color); }
-.alert.info { background-color: var(--info-color); }
+.text-alert{
+    font-size: 14px;
+    margin-left: 4px;
+}
+.alert.alert-success { background-color: var(--success-color); }
+.alert.alert-error { background-color: var(--danger-color); }
+.alert.alert-info { background-color: var(--info-color); }
+.alert-close{
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--white-color);
+    transition: color var(--transition-speed) ease;
+}
 
 @keyframes slideInRight {
     from { transform: translateX(100%); opacity: 0; }

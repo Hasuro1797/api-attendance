@@ -1,5 +1,6 @@
 import {
   IsEmail,
+  IsEnum,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -7,6 +8,7 @@ import {
   MinLength,
 } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { Modality } from 'src/common/enums/roles.enum';
 
 export class CreateUserDto {
   @ApiProperty({
@@ -67,4 +69,14 @@ export class CreateUserDto {
   @IsString({ message: 'El departamento debe ser una cadena de texto' })
   @IsNotEmpty({ message: 'El departamento es obligatorio' })
   department: string;
+
+  @ApiProperty({
+    example: 'PRESENTIAL',
+    description: 'Modalidad del usuario (PRESENTIAL o REMOTE)',
+    required: true,
+  })
+  @IsString({ message: 'La modalidad debe ser una cadena de texto' })
+  @IsNotEmpty({ message: 'La modalidad es obligatoria' })
+  @IsEnum(Modality, { message: 'La modalidad debe ser PRESENTIAL o REMOTE' })
+  modality: Modality;
 }
