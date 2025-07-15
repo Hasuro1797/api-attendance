@@ -757,6 +757,7 @@ select.form-control {
     .modal-content {
         max-width: 95%;
         margin: 0.5rem;
+        overflow-y: auto;
     }
     
     .modal-header {

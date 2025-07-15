@@ -30,7 +30,7 @@ function showAlert(message, type = 'success') {
     if (alertElement.parentNode) {
       alertElement.remove();
     }
-  }, 5000000);
+  }, 5000);
 }
 
 // Función para manejar el avatar del usuario
